@@ -2,20 +2,29 @@
 
 namespace Tests\Feature;
 
+use App\Signature;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class SignaturesTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testExample()
+    use RefreshDatabase;
+
+
+    public function testRetrieveAllSignatures()
     {
-        $response = $this->get('/');
+        $examples = factory(Signature::class, 10)->create();
+        $response = $this->get('/api/signatures');
+
+        $response->assertStatus(200);
+    }
+
+
+    public function testAddSigunature()
+    {
+        $example = factory(Signature::class)->make();
+        $response = $this->post('/api/signatures', $example->toArray());
 
         $response->assertStatus(200);
     }
