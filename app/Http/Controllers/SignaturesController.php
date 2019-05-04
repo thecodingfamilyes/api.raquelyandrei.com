@@ -15,6 +15,7 @@ class SignaturesController extends Controller
     public function store(Request $req)
     {
         return Signature::create([
+            'name' => $req->name,
             'email' => $req->email,
             'message' => $req->message
         ]);
