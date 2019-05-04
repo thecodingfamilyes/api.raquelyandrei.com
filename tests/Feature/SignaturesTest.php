@@ -25,6 +25,6 @@ class SignaturesTest extends TestCase
         $example = factory(Signature::class)->make();
         $response = $this->post('/api/signatures', $example->toArray());
 
-        $response->assertStatus(201);
+        $response->assertStatus(200);
     }
 }
