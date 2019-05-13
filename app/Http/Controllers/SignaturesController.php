@@ -18,6 +18,7 @@ class SignaturesController extends Controller
     {
         return response()->json($this->transform(Signature::create([
             'name' => $req->name,
+            'image' => $req->image,
             'email' => $req->email,
             'message' => $req->message
         ])));
@@ -30,7 +31,7 @@ class SignaturesController extends Controller
 
         return [
             'name' => $signature->name,
-            'gravatar' => "https://www.gravatar.com/avatar/{$email}?s={$size}&default=robohash",
+            'gravatar' => $signature->image ?? "https://www.gravatar.com/avatar/{$email}?s={$size}&default=robohash",
             'message' => $signature->message,
             'created_at' => $signature->created_at
         ];
